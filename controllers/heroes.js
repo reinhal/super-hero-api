@@ -12,4 +12,18 @@ const getHeroBySlug = (request, response) => {
   return response.send(foundHero)
 }
 
-module.exports = { getAllHeroes, getHeroBySlug }
+const saveNewHero = (request, response) => {
+  const { name, realname, firstappearance, slug } = request.body
+
+  if (!name || !realname || !firstappearance || !slug) {
+    return response.status(400).send('The following fields are required: name, realname, firstappearance, slug')
+  }
+
+  const newHero = { name, realname, firstappearance, slug }
+
+  heroes.push(newHero)
+
+  return response.status(201).send(newHero)
+}
+
+module.exports = { getAllHeroes, getHeroBySlug, saveNewHero }
