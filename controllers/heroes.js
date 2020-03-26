@@ -7,18 +7,24 @@ const getAllHeroes = async (request, response) => {
 }
 
 const getHeroBySlug = async (request, response) => {
-  const { slug } = request.params
+  try {
+    const { slug } = request.params
 
-  const foundHero = await models.heroes.findOne({ where: { slug } })
+    const foundHero = await models.heroes.findOne({ where: { slug } })
 
-  return response.send(foundHero)
+    return foundHero
+      ? response.send(foundHero)
+      : response.sendStatus(404)
+  } catch (error) {
+    return response.status(500).send('Unable to retrieve hero, please try again')
+  }
 }
 
 const saveNewHero = async (request, response) => {
   const { name, realname, firstappearance, slug } = request.body
 
   if (!name || !realname || !firstappearance || !slug) {
-    return response.status(400).send('The following fields are required: name, realname, firstappearance, slug')
+    return request.status(400).send('The following fields are required: name, realname, firstappearance, slug')
   }
 
   const newHero = await models.heroes.create({ name, realname, firstappearance, slug })
