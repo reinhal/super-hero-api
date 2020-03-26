@@ -1,0 +1,20 @@
+{
+  "name": "super-hero-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "./node_modules/.bin/nodemon index.js",
+    "lint": "./node_modules/.bin/eslint --format codeframe .",
+    "lint:fix": "./node_modules/.bin/eslint --fix --format codeframe ."
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "nodemon": "^2.0.2"
+  }
+}
